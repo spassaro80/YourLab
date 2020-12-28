@@ -1,0 +1,456 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Statistiche</title>
+{% load static %}
+	<link href="{% static 'core/css/style.css' %}" rel="stylesheet" type="text/css" media="screen">
+	<link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="{% static 'core/js/jquery-1.11.1.min.js' %}"></script>
+	<link href="{% static 'core/js/bootstrap.bundle.min.js' %}" rel="stylesheet" type="text/javascript">
+
+
+</head>
+<body>
+	<header class="header clearfix">
+		<div>
+			<h1>STATISTICHE PARTITA</h1>
+	</div>
+	</header>
+	<form action="" method="POST"> {% csrf_token %}
+		<div class="form-row mt-3">
+			<div class="col-2 offset-4">
+				<input type="text" class="form-control my-2 mx-3" id="cname" value="{{ match.chanpionship }}" placeholder='Campionato'>
+				<input type="date" class="form-control my-2 mx-3" id="cdate" value="{{ match.date|date:'Y-m-d' }}" placeholder='Data'>
+				<input type="text" class="form-control my-2 mx-3" id="cweather" value="{{ match.weather}}" placeholder='Tempo'>
+			</div>
+			<div class="col-2">
+				<input type="text" class="form-control my-2 mx-3" id="cplace" value="{{ match.place}}" placeholder='Luogo'>
+				<input type="time" class="form-control my-2 mx-3" id="ctime" value="{{ match.time|time:'H:i:s' }}" placeholder='Ora'>
+				<input type="text" class="form-control my-2 mx-3" id="ctemperature" value="{{ match.temperature}}" placeholder='Temperatura'>
+			</div>
+		</div>
+
+	</form>
+	<h2 class="mx-3">1° TEMPO</h2>
+		<form action="{% url 'core:update_match' match.pk %}" method="POST"> {% csrf_token %}
+			<div class="row">
+				<div class="column col-5 mt-5 mx-3">
+					<div class="form-group">
+						<div class="cronom">
+							<input type="time" class="crono" id="crono1" value="{{stats.first_half|time:'H:i:s'}}" step="0.10" name="crono1">
+							<div id="button_container" style="display: inline; margin-left: 10px;">
+								<button type="button" class="btn btn-sm startbtn" id="crono1" name="avvia">AVVIA</button>
+								<button type="button" class="btn btn-sm stopbtn" id="stop" name="stop">STOP</button>
+								<button type="button" class="btn btn-sm resetbtn" id="azzera" name="azzera">AZZERA</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="column col-5 mt-5 mx-3">
+					<div class="form-group">
+						<div class="row">
+						<input class="form-control foglio1 mt-2" type="text" id="team2name" name="team1name" value= "{{match.team_a}}" placeholder="Nome Squadra">
+						</div>
+						<div class="cronom">
+							<input type="time" class="crono" id="crono2" value="{{stats.possession1A|time:'H:i:s'}}" step="0.10" name="crono2">	
+							<div id="button_container" style="display: inline; margin-left: 10px;">
+								<button type="button" class="btn btn-sm startbtn" id="avvia" name="avvia">AVVIA</button>
+								<button type="button" class="btn btn-sm stopbtn" id="stop" name="stop">STOP</button>
+								<button type="button" class="btn btn-sm resetbtn" id="azzera" name="azzera">AZZERA</button>
+							</div>
+						</div>
+						<div class="pt-4 pb-2">Tiri in porta</div>
+							<div id="tp1" class="form-row justify-content-center">
+								<div class="form-group col-2">
+									<input type="number" class="form-control mb-2" id="tpd1A" name="tpd1A" value="{{ stats.tiri_in_porta1A_dx }}" size="1">
+								</div>
+								<div class="form-group col-2">
+									<input type="number" class="form-control mb-2" id="tpc1A" name="tpc1A" value="{{ stats.tiri_in_porta1A_cc }}"size="1">
+								</div>
+								<div class="form-group col-2">
+									<input type="number" class="form-control mb-2" id="tps1A" name="tps1A" value="{{ stats.tiri_in_porta1A_sx }}"size="1">
+								</div>
+							</div>
+						<div class="pb-2">Tiri Fuori</div>
+						<div id="tf1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="tfd1A" name="tfd1A" value="{{ stats.tiri_in_fuori1A_dx }}"size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="tfc1A" name="tfc1A" value="{{ stats.tiri_in_fuori1A_cc }}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="tfs1A" name="tfs1A" value="{{ stats.tiri_in_fuori1A_sx }}" size="1">
+							</div>
+						</div>
+						<div class="pb-2">Punizioni Offensive</div>
+						<div id="po1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pod1A" name="pod1A" value="{{stats.punizioni_offensive1A_dx}}"size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="poc1A" name="poc1A" value="{{stats.punizioni_offensive1A_cc}}"size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pos1A" name="pos1A" value="{{stats.punizioni_offensive1A_sx}}"size="1">
+							</div>
+						</div>
+						<div class="pb-2">Punizioni Difensive</div>
+						<div id="pd1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pdd1A" name="pdd1A" value="{{stats.punizioni_difensive1A_sx}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pdc1A" name="pdc1A" value="{{stats.punizioni_difensive1A_cc}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pds1A" name="pds1A" value="{{stats.punizioni_difensive1A_dx}}" size="1">
+							</div>
+						</div>
+						<div class="pb-2">Cross</div>
+						<div id="cr1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="crd1A"  name="crd1A" value="{{stats.cross_dx1A}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="crc1A" name= "crc1A" value="{{stats.cross_cc1A}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="crs1A" name ="crs1A"value="{{stats.cross_sx1A}}" size="1">
+							</div>
+						</div>
+						<div class="pb-2">Calci d'angolo</div>
+						<div id="cd1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="cda1A" name ="cda1A" value="{{stats.corners1A}}"size="1">
+							</div>
+						</div>
+						<div class="pb-2">Parate</div>
+						<div id="pa1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="par1A" name="par1A" value="{{stats.parate1A}}"size="1">
+							</div>
+						</div>
+						<div class="pb-2">Fuorigioco</div>
+						<div id="fu1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="fuo1A" name="fuo1A" value="{{stats.fuorigioco1A}}"size="1">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="column2 col-5 mt-5 mx-3">
+					<div class="form-group">
+						<div class="row">
+						<input class="form-control foglio1 mt-2" type="text" id="team2name" name="team2name" value= "{{match.team_b}}" placeholder="Nome Squadra">
+						</div>
+						<div class="cronom">
+							<input type="time" class="crono" id="crono3" value="{{stats.possession1B|time:'H:i:s'}}" step="0.10" name="crono3">	
+							<div id="button_container" style="display: inline; margin-left: 10px;">
+								<button type="button" class="btn btn-sm startbtn" id="avvia" name="avvia">AVVIA</button>
+								<button type="button" class="btn btn-sm stopbtn" id="stop" name="stop">STOP</button>
+								<button type="button" class="btn btn-sm resetbtn" id="azzera" name="azzera">AZZERA</button>
+							</div>
+						</div>
+						<div class="pt-4 pb-2">Tiri in porta</div>
+							<div id="tp1" class="form-row justify-content-center">
+								<div class="form-group col-2">
+									<input type="number" class="form-control mb-2" id="tpd1B" name="tpd1B" value="{{ stats.tiri_in_porta1B_dx }}" size="1">
+								</div>
+								<div class="form-group col-2">
+									<input type="number" class="form-control mb-2" id="tpc1B" name="tpc1B" value="{{ stats.tiri_in_porta1B_cc }}"size="1">
+								</div>
+								<div class="form-group col-2">
+									<input type="number" class="form-control mb-2" id="tps1B" name="tps1B" value="{{ stats.tiri_in_porta1B_sx }}"size="1">
+								</div>
+							</div>
+						<div class="pb-2">Tiri Fuori</div>
+						<div id="tf1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="tfd1B" name="tfd1B" value="{{ stats.tiri_in_fuori1B_dx }}"size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="tfc1B" name="tfc1B" value="{{ stats.tiri_in_fuori1B_cc }}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="tfs1B" name="tfs1B" value="{{ stats.tiri_in_fuori1B_sx }}" size="1">
+							</div>
+						</div>
+						<div class="pb-2">Punizioni Offensive</div>
+						<div id="po1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pod1B" name="pod1B" value="{{stats.punizioni_offensive1B_dx}}"size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="poc1B" name="poc1B" value="{{stats.punizioni_offensive1B_cc}}"size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pos1B" name="pos1B" value="{{stats.punizioni_offensive1B_sx}}"size="1">
+							</div>
+						</div>
+						<div class="pb-2">Punizioni Difensive</div>
+						<div id="pd1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pdd1B" name="pdd1B" value="{{stats.punizioni_difensive1B_sx}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pdc1B" name="pdc1B" value="{{stats.punizioni_difensive1B_cc}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pds1B" name="pds1B" value="{{stats.punizioni_difensive1B_dx}}" size="1">
+							</div>
+						</div>
+						<div class="pb-2">Cross</div>
+						<div id="cr1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="crd1B"  name="crd1B" value="{{stats.cross_dx1B}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="crc1B" name= "crc1B" value="{{stats.cross_cc1B}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="crs1B" name ="crs1B"value="{{stats.cross_sx1B}}" size="1">
+							</div>
+						</div>
+						<div class="pb-2">Calci d'angolo</div>
+						<div id="cd1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="cda1B" name ="cda1B" value="{{stats.corners1B}}"size="1">
+							</div>
+						</div>
+						<div class="pb-2">Parate</div>
+						<div id="pa1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="par1B" name="par1B" value="{{stats.parate1B}}"size="1">
+							</div>
+						</div>
+						<div class="pb-2">Fuorigioco</div>
+						<div id="fu1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="fuo1B" name="fuo1B" value="{{stats.fuorigioco1B}}"size="1">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h2 class="mx-3 mt-4">2° TEMPO</h2>
+			<div class="row">
+				<div class="column col-5 mt-5 mx-3">
+					<div class="form-group">
+						<div class="cronom">
+							<input type="time" class="crono" id="crono4" value="{{stats.second_half|time:'H:i:s'}}" step="0.10" name="crono4">
+							<div id="button_container" style="display: inline; margin-left: 10px;">
+								<button type="button" class="btn btn-sm startbtn" id="crono4" name="avvia">AVVIA</button>
+								<button type="button" class="btn btn-sm stopbtn" id="stop" name="stop">STOP</button>
+								<button type="button" class="btn btn-sm resetbtn" id="azzera" name="azzera">AZZERA</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="column col-5 mt-5 mx-3">
+					<div class="form-group">
+						<div class="row">
+						<input class="form-control foglio1 mt-2" type="text" id="team2name" name="team1name" value= "{{match.team_a}}" placeholder="Nome Squadra">
+						</div>
+						<div class="cronom">
+							<input type="time" class="crono" id="crono5" value="{{stats.possession2A|time:'H:i:s'}}" step="0.10" name="crono5">	
+							<div id="button_container" style="display: inline; margin-left: 10px;">
+								<button type="button" class="btn btn-sm startbtn" id="avvia" name="avvia">AVVIA</button>
+								<button type="button" class="btn btn-sm stopbtn" id="stop" name="stop">STOP</button>
+								<button type="button" class="btn btn-sm resetbtn" id="azzera" name="azzera">AZZERA</button>
+							</div>
+						</div>
+						<div class="pt-4 pb-2">Tiri in porta</div>
+							<div id="tp1" class="form-row justify-content-center">
+								<div class="form-group col-2">
+									<input type="number" class="form-control mb-2" id="tpd2A" name="tpd2A" value="{{ stats.tiri_in_porta2A_dx }}" size="1">
+								</div>
+								<div class="form-group col-2">
+									<input type="number" class="form-control mb-2" id="tpc2A" name="tpc2A" value="{{ stats.tiri_in_porta2A_cc }}"size="1">
+								</div>
+								<div class="form-group col-2">
+									<input type="number" class="form-control mb-2" id="tps2A" name="tps2A" value="{{ stats.tiri_in_porta2A_sx }}"size="1">
+								</div>
+							</div>
+						<div class="pb-2">Tiri Fuori</div>
+						<div id="tf1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="tfd2A" name="tfd2A" value="{{ stats.tiri_in_fuori2A_dx }}"size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="tfc2A" name="tfc2A" value="{{ stats.tiri_in_fuori2A_cc }}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="tfs2A" name="tfs2A" value="{{ stats.tiri_in_fuori2A_sx }}" size="1">
+							</div>
+						</div>
+						<div class="pb-2">Punizioni Offensive</div>
+						<div id="po1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pod2A" name="pod2A" value="{{stats.punizioni_offensive2A_dx}}"size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="poc2A" name="poc2A" value="{{stats.punizioni_offensive2A_cc}}"size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pos2A" name="pos2A" value="{{stats.punizioni_offensive2A_sx}}"size="1">
+							</div>
+						</div>
+						<div class="pb-2">Punizioni Difensive</div>
+						<div id="pd1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pdd2A" name="pdd2A" value="{{stats.punizioni_difensive2A_sx}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pdc2A" name="pdc2A" value="{{stats.punizioni_difensive2A_cc}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pds2A" name="pds2A" value="{{stats.punizioni_difensive2A_dx}}" size="1">
+							</div>
+						</div>
+						<div class="pb-2">Cross</div>
+						<div id="cr1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="crd2A"  name="crd2A" value="{{stats.cross_dx2A}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="crc2A" name= "crc2A" value="{{stats.cross_cc2A}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="crs2A" name ="crs2A"value="{{stats.cross_sx2A}}" size="1">
+							</div>
+						</div>
+						<div class="pb-2">Calci d'angolo</div>
+						<div id="cd1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="cda2A" name ="cda2A" value="{{stats.corners2A}}"size="1">
+							</div>
+						</div>
+						<div class="pb-2">Parate</div>
+						<div id="pa1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="par2A" name="par2A" value="{{stats.parate2A}}"size="1">
+							</div>
+						</div>
+						<div class="pb-2">Fuorigioco</div>
+						<div id="fu1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="fuo2A" name="fuo2A" value="{{stats.fuorigioco2A}}"size="1">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="column2 col-5 mt-5 mx-3">
+					<div class="form-group">
+						<div class="row">
+						<input class="form-control foglio1 mt-2" type="text" id="team2name" name="team2name" value= "{{match.team_b}}" placeholder="Nome Squadra">
+						</div>
+						<div class="cronom">
+							<input type="time" class="crono" id="crono6" value="{{stats.possession2B|time:'H:i:s'}}" step="0.10" name="crono6">	
+							<div id="button_container" style="display: inline; margin-left: 10px;">
+								<button type="button" class="btn btn-sm startbtn" id="avvia" name="avvia">AVVIA</button>
+								<button type="button" class="btn btn-sm stopbtn" id="stop" name="stop">STOP</button>
+								<button type="button" class="btn btn-sm resetbtn" id="azzera" name="azzera">AZZERA</button>
+							</div>
+						</div>
+						<div class="pt-4 pb-2">Tiri in porta</div>
+							<div id="tp1" class="form-row justify-content-center">
+								<div class="form-group col-2">
+									<input type="number" class="form-control mb-2" id="tpd2B" name="tpd2B" value="{{ stats.tiri_in_porta2B_dx }}" size="1">
+								</div>
+								<div class="form-group col-2">
+									<input type="number" class="form-control mb-2" id="tpc2B" name="tpc2B" value="{{ stats.tiri_in_porta2B_cc }}"size="1">
+								</div>
+								<div class="form-group col-2">
+									<input type="number" class="form-control mb-2" id="tps2B" name="tps2B" value="{{ stats.tiri_in_porta2B_sx }}"size="1">
+								</div>
+							</div>
+						<div class="pb-2">Tiri Fuori</div>
+						<div id="tf1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="tfd2B" name="tfd2B" value="{{ stats.tiri_in_fuori2B_dx }}"size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="tfc2B" name="tfc2B" value="{{ stats.tiri_in_fuori2B_cc }}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="tfs2B" name="tfs2B" value="{{ stats.tiri_in_fuori2B_sx }}" size="1">
+							</div>
+						</div>
+						<div class="pb-2">Punizioni Offensive</div>
+						<div id="po1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pod2B" name="pod2B" value="{{stats.punizioni_offensive2B_dx}}"size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="poc2B" name="poc2B" value="{{stats.punizioni_offensive2B_cc}}"size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pos2B" name="pos2B" value="{{stats.punizioni_offensive2B_sx}}"size="1">
+							</div>
+						</div>
+						<div class="pb-2">Punizioni Difensive</div>
+						<div id="pd1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pdd2B" name="pdd2B" value="{{stats.punizioni_difensive2B_sx}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pdc2B" name="pdc2B" value="{{stats.punizioni_difensive2B_cc}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="pds2B" name="pds2B" value="{{stats.punizioni_difensive2B_dx}}" size="1">
+							</div>
+						</div>
+						<div class="pb-2">Cross</div>
+						<div id="cr1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="crd2B"  name="crd2B" value="{{stats.cross_dx2B}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="crc2B" name= "crc2B" value="{{stats.cross_cc2B}}" size="1">
+							</div>
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="crs2B" name ="crs2B"value="{{stats.cross_sx2B}}" size="1">
+							</div>
+						</div>
+						<div class="pb-2">Calci d'angolo</div>
+						<div id="cd1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="cda2B" name ="cda2B" value="{{stats.corners2B}}"size="1">
+							</div>
+						</div>
+						<div class="pb-2">Parate</div>
+						<div id="pa1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="par2B" name="par2B" value="{{stats.parate2B}}"size="1">
+							</div>
+						</div>
+						<div class="pb-2">Fuorigioco</div>
+						<div id="fu1" class="form-row justify-content-center">
+							<div class="form-group col-2">
+								<input type="number" class="form-control mb-2" id="fuo2B" name="fuo2B" value="{{stats.fuorigioco2B}}"size="1">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<input type="submit" class="btn btn btn-warning mt-2" value="UPDATE STATS">
+		</form>
+
+
+
+	<script type="text/javascript" src="{% static 'core/js/timer.js' %}"></script>
+	<script type="text/javascript" src="{% static 'core/js/cronos.js' %}"></script>
+
+
+</body>
+</html>
