@@ -1,32 +1,35 @@
+{% extends 'core/base.html' %}
 {% load static %}
+{% block sidebar  %}
+{% include 'core/partials/sidebar.html' %}
+{% endblock  %}
+{% block content %}
 <style>.errorlist{color:red;}</style>
 <main role="main">
-  <div class="container">
-    <div class="row mt-3">
-      <div class="col-md-9 mx-auto mb-5">
-        {% if 'registered' in request.GET %}
-        <p style="color:green"> Usuario registrado correctamente! </p>
-        {% endif %}
-        <form action="" method="post">{% csrf_token %}
-          <h3 class="mb-4">Iniciar sesión</h3>
-          {% if form.non_field_errors %}
-            <p style="color:red">Usuario o contraseña incorrectos, prueba de nuevo.</p>
+    <div class="container mt-2">
+      <div class="row mt-3">
+        <div class="col-md-9 mx-auto mb-5">
+          {% if 'registered' in request.GET %}
+          <p style="color:green"> Usuario registrado correctamente! </p>
           {% endif %}
-          <p>
-            <input type="text" name="username" autofocus maxlength="254" required
-              id="id_username" class="form-control" placeholder="Nombre de usuario"/>
-          </p>
-          <p>
-            <input type="password" name="password" required
-              id="id_password" class="form-control" placeholder="Contraseña"/>
-          </p>
-          <p><input type="submit" class="btn btn-primary btn-block" value="Acceder"></p>
-          <p>
-            Si quiere restablecer su contraseña haga click <a href="{% url 'password_reset' %}"> aquí </a> 
-          </p>
-        </form>
+          <form action="" method="post">{% csrf_token %}
+              <h3 class="mb-4">Login</h3>
+              {% if form.non_field_errors %}
+                <p style="color:red">Errore all'introdurre User o Password</p>
+              {% endif %}
+              <p>
+            <div class="form-group">
+              <label for="id_username">Username</label>
+              <input type="text" class="form-control" id="id_username" name="username" aria-describedby="userHelp" placeholder="Nuovo account">
+              <small id="userHelp" class="form-text text-muted">Obbligatorio. Max 150 caratteri. Lettere, numeri e simboli (@/./+/-/_).</small>
+            </div>
+            <div class="form-group">
+              <label for="id_password1">Password</label>
+              <input type="password" class="form-control" id="id_password" name="password" placeholder="Password" aria-autocomplete="list" required>
+            </div>
+            <button type="submit" class="mt-2 btn btn-success btn-block">Accedi!</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</main>
-
+{%endblock%}

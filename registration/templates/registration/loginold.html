@@ -1,0 +1,332 @@
+<html>
+{% load static %}
+  <head>
+<link rel="stylesheet" href="{% static 'registration/stim.css' %}">
+<style media="screen">
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% auto;}
+header {width:100%}
+
+.rettangolo {
+	width:100%;
+	height: 25px;
+	background:#212121;
+	padding-top: 15px;
+}
+
+/*-----------------------------
+lingua
+-----------------------------*/
+#menu1  {
+	position: relative;
+	float: right;
+	width: 40px;
+
+	list-style: none;
+
+}
+/* Full-width input fields */
+input[type=text], input[type=password] {
+width: 100%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+background-color: orange;
+color: white;
+padding: 7px 10px;
+margin: 9px 0;
+border: none;
+cursor: pointer;
+width:100%;
+}
+
+button:hover {
+opacity: 0.8;
+}
+.pagina1 {
+text-align: center;
+margin: 24px 0 12px 0;
+
+}
+/* Extra styles for the cancel button */
+.cancelbtn {
+width: auto;
+padding: 10px 18px;
+background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+text-align: center;
+margin: 24px 0 12px 0;
+position: relative;
+height: 20%;
+}
+
+img.avatar {
+width: 13%;
+border-radius: 50%;
+}
+
+.container {
+padding: 16px;
+
+}
+
+span.psw {
+float: right;
+padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+display: none; /* Hidden by default */
+position: fixed; /* Stay in place */
+z-index: 1; /* Sit on top */
+left: 0;
+top: 0;
+width: 100%; /* Full width */
+height: 100%; /* Full height */
+overflow: auto; /* Enable scroll if needed */
+background-color: rgb(0,0,0); /* Fallback color */
+background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+background-color: #fefefe;
+margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+border: 1px solid #888;
+width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+position: absolute;
+right: 25px;
+top: 0;
+color: #000;
+font-size: 35px;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: red;
+cursor: pointer;
+}
+.row > p{
+	color:#008080;
+  padding-left: 20px;
+}
+/* Add Zoom Animation */
+.animate {
+-webkit-animation: animatezoom 0.6s;
+animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+from {-webkit-transform: scale(0)}
+to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+from {transform: scale(0)}
+to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+span.psw {
+   display: block;
+   float: none;
+}
+.cancelbtn {
+   width: 100%;
+}
+
+
+
+}
+body {
+  margin: 0;
+  background-image: url(campo.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  background-size: cover;
+  position: relative;
+  height: 100vh;
+}
+body:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(stripe-black.png);
+}
+h2 {
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index:3;
+  font-size: 40px;
+  color: white;
+  letter-spacing: 2px;
+  border: 8px solid;
+  padding: 12px 15px;
+  margin: 0;
+  text-transform: uppercase;
+  font-family: arial;
+  text-align: center;
+}
+h6 {
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  z-index:3;
+
+  color: white;
+  letter-spacing: 2px;
+
+  padding: 12px 15px;
+  margin: 0;
+
+  font-family: arial;
+  text-align: center;
+}
+
+</style>
+  </head>
+  <body style="background-color:	#a9a9a9;">
+    <header class="header clearfix">
+  	<div style="text-align: center">
+  <div class="rettangolo">
+  	<div id="menu1" >
+  					<a href="#"><img src="{% static 'registration/img/ing.png' %}"></a>
+  	</div>
+
+
+  	<div id="menu1" >
+  						<a href="#"><img src="{% static 'registration/img/germ.png' %}"></a>
+  		</div>
+
+  	<div id="menu1" >
+
+  							<a href="#"><img src="{% static 'registration/img/ita.png' %}"></a>
+
+  			</div></div>
+
+  	<a href="index.html" class="header__logo"><img src="{% static 'registration/img/cstaticlogo.png' %}" ></a>
+
+  		<a href="" class="header__icon-bar">
+  			<span></span>
+  			<span></span>
+  			<span></span>
+  		</a>
+
+
+  	</header>
+        {% if 'registered' in request.GET %}
+        <p style="color:green"> Usuario registrado correctamente! </p>
+        {% endif %}
+<div class="giocatore"><img src="{% static 'registration/img/gioc.png' %}" > </div><h2>Statistiche</h2><br><h6>Prova le nuove funzionalità</h6>
+
+<div id="id01" class="modal">
+
+<form class="modal-content animate" action="/action_page.php" method="post">
+<div class="imgcontainer">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <img src="{% static 'registration/img_avatar2.png' %}" alt="Avatar" class="avatar" >
+</div>
+
+<div class="container">
+  <label for="uname"><b>Username</b></label>
+  <input type="text" placeholder="Enter Username" name="uname" required>
+
+  <label for="psw"><b>Password</b></label>
+  <input type="password" placeholder="Enter Password" name="psw" required>
+
+  <button type="submit">Login</button>
+  <label>
+    <input type="checkbox" checked="checked" name="remember"> Remember me
+  </label>
+</div>
+
+<div class="container" style="background-color:#f1f1f1">
+  <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+  <span class="psw">Forgot <a href="#">password?</a></span>
+</div>
+<div class="row">
+						<p>Don't have an account? <a href="#">Register Here</a></p>
+					</div>
+</form>
+</div></div><nav class="main-menu">
+            <ul>
+                <li>
+                    <a href="">
+                        <i class="fa fa-laptop fa-2x"></i>
+                        <span class="nav-text">
+                            Dashboard
+                        </span>
+                    </a>
+
+                </li>
+                <li class="has-subnav">
+                    <a href="#">
+                        <i class="fa fa-user fa-2x"></i>
+                        <span class="nav-text">
+                            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+                        </span>
+                    </a>
+
+                </li>
+
+                <li>
+                   <a href="#">
+                        <i class="fa fa-envelope-o fa-2x"></i>
+                        <span class="nav-text">
+                            E-mail
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                       <i class="fa fa-info fa-2x"></i>
+                        <span class="nav-text">
+                            Documentation
+                        </span>
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+  </body>
+    </html>

@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block sidebar %}
+{% include 'core/partials/sidebar.html' %}
+{% endblock  %}
+{% block content %}
+	<div>
+	<h1>Tutte le partite</h1>
+	</div>
+	{%for match in matches%}
+	<a href="{% url 'core:display_match' match.pk %}"><h2 class="my-3">{{match.team_a}} vs {{match.team_b}} del {{match.date|date:'d/m/Y'}}</h2></a> 
+	<a href="{%url 'core:stats' match.id %}" ><button type="button" class="btn btn-success btn-sm">Statistiche</button></a></>
+	{%endfor%}   
+
+{%endblock%}
+
+

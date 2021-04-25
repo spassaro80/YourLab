@@ -1,52 +1,43 @@
-
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Statistiche</title>
+{% extends 'core/base.html' %}
 {% load static %}
-	<link href="{% static 'core/css/style.css' %}" rel="stylesheet" type="text/css" media="screen">
-	<link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
-	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
-	<script type="text/javascript" src="{% static 'core/js/jquery-1.11.1.min.js' %}"></script>
-	<link href="{% static 'core/js/bootstrap.bundle.min.js' %}" rel="stylesheet" type="text/javascript">
+{% block sidebar %}
+{% include 'core/partials/mainsidebar.html' %}
+{% endblock  %}
+{% block content %}
 
-
-</head>
-<body>
-	<header class="header clearfix">
-		<div>
-			<h1>STATISTICHE PARTITA</h1>
+<div class="container-fluid mt-3">
+	<div class="row mt-5">
+		  <div class="col-4">
+			  <div class="card">
+					<img class="logo-small" src="{% static 'registration/img/ms.jpg'  %}" alt="Card image cap">
+					<div class="card-body">
+					<h5 class="card-title">Match Statistics</h5>
+					<p class="card-text">Nuovo sito per allenatori e professionisti del calcio per gestire in tempo reale ogni singolo aspetto della partita</p>
+					<p class="card-text"><p class="text-muted"><a href="{%url 'core:create'%}">Vai al sito</a></p></p>
+					</div>
+			  </div>
+		  </div>
+		  <div class="col-4">
+			  <div class="card">
+						  <img class="logo-small" src="{% static 'registration/img/banner1.jpg'  %}" alt="Immagine">
+						  <div class="card-body">
+							<h5 class="card-title">Un altro sito</h5>
+							<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, officia aliquid nulla nobis inventore, beatae et voluptates ea ipsam consequuntur cupiditate quo quae nisi suscipit neque blanditiis esse quis fugiat!</p>
+							<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+						  </div>
+			  </div>
+		  </div>
+		  <div class="col-4">
+				<div class="card">
+					<img class="logo-small" src="{% static 'registration/img/banner2.jpg'  %}" alt="Immagine">
+					<div class="card-body">
+					<h5 class="card-title">un Terzo sito</h5>
+					<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus suscipit assumenda eius, ipsa, veniam autem doloribus facere fugiat voluptatum quae, maxime quia voluptate rerum voluptas alias quo. Minus, reiciendis a.</p>
+					<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+					</div>
+				</div>
+		  </div>
 	</div>
-	</header>
-	<form action="{% url 'core:create_match' %}" method="POST"> {% csrf_token %}
-		<div class="form-row mt-3">
-			<div class="col-2 offset-4">
-				<input type="text" class="form-control my-2 mx-3" id="cname" placeholder='Campionato' name='chanpionship'>
-				<input type="date" class="form-control my-2 mx-3" id="cdate" placeholder='Data' name="date">
-				<input type="text" class="form-control my-2 mx-3" id="cweather" placeholder='Tempo' name="weather">
-				<input type="text" class="form-control my-2 mx-3" id="team1" placeholder='Squadra di casa' name="team_a">
-			</div>
-			<div class="col-2">
-				<input type="text" class="form-control my-2 mx-3" id="cplace" placeholder='Luogo' name="place">
-				<input type="time" class="form-control my-2 mx-3" id="ctime" placeholder='Ora' name="time">
-				<input type="text" class="form-control my-2 mx-3" id="ctemperature" placeholder='Temperatura' name="temperature">
-				<input type="text" class="form-control my-2 mx-3" id="team2" placeholder='Squadra ospite' name="team_b">
-			</div>
-			<div class="col-4 offset-4">
-				<input type="submit" class="btn btn btn-lg btn-success mt-2" value="NUOVA PARTITA">
-			</div>
-		</div>
+</div>
 
-	</form>
-
-
-
-
-	<script type="text/javascript" src="{% static 'core/js/timer.js' %}"></script>
-	<script type="text/javascript" src="{% static 'core/js/cronos.js' %}"></script>
-
-
-</body>
-</html>
+{%endblock%}

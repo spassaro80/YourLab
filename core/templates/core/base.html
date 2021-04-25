@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Statistiche</title>
+{% load static %}
+	<link href="{% static 'core/css/style.css' %}" rel="stylesheet" type="text/css" media="screen">
+	<link href="{% static 'core/fontawesome/css/all.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="{% static 'core/js/jquery-1.11.1.min.js' %}"></script>
+	<link href="{% static 'core/js/bootstrap.bundle.min.js' %}" rel="stylesheet" type="text/javascript">
+
+
+</head>
+<body>
+
+  <div class="container-fluid">
+    <div class="row">
+    <img src="{% static 'registration/img/ms.jpg'  %}" class="logo" alt="">
+    </div>
+  </div>
+
+<!-- Side navigation -->
+{% block sidebar %}
+{% endblock  %}
+
+
+<div class="main">
+{%block content%}
+{%endblock%}
+</div>
+
+	<script type="text/javascript" src="{% static 'core/js/sidebar.js' %}"></script>
+	<script type="text/javascript" src="{% static 'core/js/stats.js' %}"></script>
+	<script type="text/javascript" src="{% static 'core/js/print.js' %}"></script>
+</body>
+</html>

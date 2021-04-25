@@ -49,7 +49,6 @@ function cronometro(crono, i) {
 		}
 		showCrono(crono, i);
 		setTimeout(function() {cronometro(crono, i)}, 100);
-		console.log(crono, i)
 	}
 }
 function showCrono(crono, i) {
@@ -57,7 +56,7 @@ function showCrono(crono, i) {
 	if(crono_obj[i].minuti < 10) crono_obj[i].vis = crono_obj[i].vis + "0";
 	crono_obj[i].vis = crono_obj[i].vis + crono_obj[i].minuti + ":";
 	if(crono_obj[i].secondi < 10) crono_obj[i].vis = crono_obj[i].vis + "0";
-	crono_obj[i].vis = crono_obj[i].vis + crono_obj[i].secondi + "." + crono_obj[i].decimi;
+	crono_obj[i].vis = crono_obj[i].vis + crono_obj[i].secondi/* + "."+ crono_obj[i].decimi*/;
 	crono.value = crono_obj[i].vis;
 }
 function stopCrono(crono, i) {

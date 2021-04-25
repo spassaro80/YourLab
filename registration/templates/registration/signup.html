@@ -1,17 +1,45 @@
-
+{% extends 'core/base.html' %}
 {% load static %}
+{% block sidebar  %}
+{% include 'core/partials/sidebar.html' %}
+{% endblock  %}
+{% block content %}
 <style>.errorlist{color:red;} label{display:none>}</style>
 <main role="main">
+  <div class="container-fluid mt-1">
+    <div class="row">
+    <img src="{% static 'registration/img/ms.jpg'  %}" class="logo" alt="">
+    </div>
+  </div>
   <div class="container">
     <div class="row mt-3">
       <div class="col-md-9 mx-auto mb-5">
-        <form action="" method="post">{% csrf_token %}
+        {% comment %} <form action="" method="post">{% csrf_token %}
           <h3 class="mb-4">Registrar nuevo usuario</h3>
           {{form.as_p}}
           <p><input type="submit" class="btn btn-primary btn-block" value="Registrarse"></p>
-        </form>
+        </form> {% endcomment %}
+      <form action="" method="post">{% csrf_token %}
+        <h3 class="mb-4">Registrare un nuovo account</h3>
+          <div class="form-group">
+            <label for="id_username">New User</label>
+            <input type="text" class="form-control" id="id_username" name="username" aria-describedby="userHelp" placeholder="Nuovo account">
+            <small id="userHelp" class="form-text text-muted">Obbligatorio. Max 150 caratteri. Lettere, numeri e simboli (@/./+/-/_).</small>
+          </div>
+          <div class="form-group">
+            <label for="id_password1">Password</label>
+            <input type="password" class="form-control" id="id_password1" name="password1" placeholder="Password" aria-autocomplete="list" required>
+          </div>
+          <div class="form-group">
+            <label for="id_password2">Conferma Password</label>
+            <input type="password" class="form-control" id="id_password2" name="password2" placeholder="Password" aria-describedby="pwd2Help" aria-autocomplete="list" required>
+            <small id="pw2Help" class="form-text text-muted">Scrivi di nuovo la password per motivi di sicurezza.</small>
+          </div>
+          <button type="submit" class="mt-2 btn btn-success btn-block">Registra</button>
+      </form>
       </div>
     </div>
   </div>
 </main>
+{%endblock%}
 

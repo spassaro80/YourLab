@@ -1,0 +1,622 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block sidebar %}
+{% include 'core/partials/sidebar.html' %}
+{% endblock  %}
+{% block content %}
+
+	<div class="container-fluid">
+		<div class="row">
+		<div class="col-6 mt-3 offset-3">
+			<h1>Statistiche della partita  {{match.team_a}} vs {{match.team_b}} del {{match.date|date:'d/m/Y'}} </h1>
+		</div>
+			<div class="col-1 mt-4 pt-1 pl-0">
+				<a href="{%url 'core:display_match' match.id %}" ><button type="button" class="btn btn-success btn-sm">Vai alla partita</button></a>
+				<button type="button" class="btn btn-info btn-sm mt-2" id="browserPrint">Stampa</button> 
+			</div>
+		</div>
+		<div>
+			<div class="row">
+				<div class="col-2 offset-5">
+					<h1 class="title mt-2 mb-1">Primo Tempo</h1>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<h2 class="col-3 offset-3">{{match.team_a}}	</h2>
+				<h2 class="col-3 offset-1">{{match.team_b}}</h2>
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">100
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftclock">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.possession1A|safe}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Possesso Palla</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightclock">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.possession1B|safe}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">100
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.tiri_in_porta1}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.tiri_in_porta1A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Tiri in porta</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.tiri_in_porta1B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.tiri_in_porta1}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.tiri_in_fuori1}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.tiri_in_fuori1A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Tiri in fuori</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.tiri_in_fuori1B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.tiri_in_fuori1}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.punizioni_offensive1}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.punizioni_offensive1A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Punizioni Offensive</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.punizioni_offensive1B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.punizioni_offensive1}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.punizioni_difensive1}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.punizioni_difensive1A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Punizioni difensive</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.punizioni_difensive1B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.punizioni_difensive1}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.cross1}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.cross1A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Cross</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.cross1B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.cross1}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.corners1}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.corners1A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Calci d'angolo</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.corners1B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.corners1}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.parate1}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.parate1A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Parate</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.parate1B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.parate1}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.fuorigioco1}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.fuorigioco1A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Fuorigioco</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.fuorigioco1B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.fuorigioco1}}
+				</h4>
+				</div>		
+			</div>
+		</div>
+		<div>
+			<div class="row">
+				<div class="col-2 offset-5 mt-4 title">
+					<h1>Secondo Tempo </h1>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<h2 class="col-3 offset-3">{{match.team_a}}	</h2>
+				<h2 class="col-3 offset-1">{{match.team_b}}</h2>
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">100
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftclock">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.possession2A|safe}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Possesso Palla</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightclock">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.possession2B|safe}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">100
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.tiri_in_porta2}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.tiri_in_porta2A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Tiri in porta</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.tiri_in_porta2B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.tiri_in_porta2}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.tiri_in_fuori2}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.tiri_in_fuori2A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Tiri in fuori</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.tiri_in_fuori2B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.tiri_in_fuori2}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.punizioni_offensive2}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.punizioni_offensive2A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Punizioni Offensive</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.punizioni_offensive2B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.punizioni_offensive2}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.punizioni_difensive2}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.punizioni_difensive2A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Punizioni difensive</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.punizioni_difensive2B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.punizioni_difensive2}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.cross2}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.cross2A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Cross</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.cross2B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.cross2}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.corners2}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.corners2A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Calci d'angolo</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.corners2B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.corners2}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.parate2}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.parate2A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Parate</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.parate2B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.parate2}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.fuorigioco2}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.fuorigioco2A}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Fuorigioco</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.fuorigioco2B}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.fuorigioco2}}
+				</h4>
+				</div>		
+			</div>
+		</div>
+		<div>
+			<div class="row">
+				<div class="col-2 offset-5 mt-4 title">
+					<h1>Totale </h1>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<h2 class="col-3 offset-3">{{match.team_a}}	</h2>
+				<h2 class="col-3 offset-1">{{match.team_b}}</h2>
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">100
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftclock">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.possessionA|safe}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Possesso Palla</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightclock">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.possessionB|safe}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">100
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.tiri_in_porta}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.tiri_in_portaA}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Tiri in porta</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.tiri_in_portaB}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.tiri_in_porta}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.tiri_in_fuori}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.tiri_in_fuoriA}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Tiri in fuori</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.tiri_in_fuoriB}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.tiri_in_fuori2}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.punizioni_offensive}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.punizioni_offensiveA}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Punizioni Offensive</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.punizioni_offensiveB}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.punizioni_offensive}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.punizioni_difensive}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.punizioni_difensiveA}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Punizioni difensive</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.punizioni_difensiveB}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.punizioni_difensive}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.cross}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.crossA}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Cross</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.crossB}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.cross}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.corners}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.cornersA}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Calci d'angolo</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.cornersB}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.corners}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.parate}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.parateA}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Parate</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.parateB}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.parate}}
+				</h4>
+				</div>		
+			</div>
+			<div class="row align-items-center">
+				<div class="col-1 offset-2">
+				<h4 class="my-3" style="text-align: right;">{{stats.fuorigioco}}
+				</h4>
+				</div>
+				<div class="col-2 mt-2 progress leftbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">{{stats.fuorigiocoA}}</span>
+					</div>
+				</div>
+				<div class="col-2">
+				<h4 class="my-3 title">Fuorigioco</h4>
+				</div>
+				<div class="col-2 mt-2 progress rightbar">
+					<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%"> <span>{{stats.fuorigiocoB}}</span>
+					</div>
+				</div>
+				<div class="col-1">
+				<h4 class="my-3">{{stats.fuorigioco}}
+				</h4>
+				</div>		
+			</div>
+		</div>
+	</div> 
+
+{%endblock%}
+
+

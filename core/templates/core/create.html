@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block sidebar %}
+{% include 'core/partials/sidebar.html' %}
+{% endblock  %}
+
+{% block content %}
+
+	<form action="{% url 'core:create_match' %}" method="POST"> {% csrf_token %}
+		<div class="form-row mt-3">
+			<div class="col-2 offset-4">
+				<input type="text" class="form-control my-2 mx-3" id="cname" placeholder='Campionato' name='chanpionship' required>
+				<input type="date" class="form-control my-2 mx-3" id="cdate" placeholder='Data' name="date" required>
+				<input type="text" class="form-control my-2 mx-3" id="cweather" placeholder='Tempo' name="weather" required>
+				<input type="text" class="form-control my-2 mx-3" id="team1" placeholder='Squadra di casa' name="team_a" required>
+			</div>
+			<div class="col-2">
+				<input type="text" class="form-control my-2 mx-3" id="cplace" placeholder='Luogo' name="place" required>
+				<input type="time" class="form-control my-2 mx-3" id="ctime" placeholder='Ora' name="time" required>
+				<input type="text" class="form-control my-2 mx-3" id="ctemperature" placeholder='Temperatura' name="temperature" required>
+				<input type="text" class="form-control my-2 mx-3" id="team2" placeholder='Squadra ospite' name="team_b" required>
+			</div>
+			<div class="col-4 offset-4">
+				<input type="submit" class="btn btn btn-lg btn-success mt-2" value="NUOVA PARTITA">
+			</div>
+		</div>
+
+	</form>
+
+
+
+
+	<script type="text/javascript" src="{% static 'core/js/timer.js' %}"></script>
+	<script type="text/javascript" src="{% static 'core/js/cronos.js' %}"></script>
+
+{%endblock%}

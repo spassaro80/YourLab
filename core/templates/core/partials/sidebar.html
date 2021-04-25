@@ -1,0 +1,13 @@
+<div class="sidenav">
+  <a href="{% url 'core:home' %}"><i class="fas fa-home mr-3"></i>Home</a>
+  <a href="{% url 'core:display' %}"><i class="fas fa-list mr-3"></i>Partite</a>
+  <a href="{% url 'core:create' %}"><i class="fas fa-futbol mr-3"></i>Nuova Partita</a>
+  {%if not user.is_authenticated %}
+  <a href="{% url 'login' %}"><span class="fas fa-sign-in-alt mr-3"></span>Login</a>
+  <a href="{% url 'signup' %}"><span class="fas fa-user-plus mr-3"></span>Nuovo Account</a>
+  {%else%}
+  <a href="{% url 'logout' %}"><span class="fas fa-sign-out-alt mr-3"></span>Logout</a>
+  {%endif%}
+  <a href=""><span class="fas fa-info-circle mr-3"></span>Informazioni</a>
+  <a href=""><span class="fas fa-envelope-open mr-3"></span>Scrivici</a>
+</div>

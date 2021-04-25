@@ -1,24 +1,11 @@
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Statistiche</title>
+{% extends 'core/base.html' %}
 {% load static %}
-	<link href="{% static 'core/css/style.css' %}" rel="stylesheet" type="text/css" media="screen">
-	<link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
-	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
-	<script type="text/javascript" src="{% static 'core/js/jquery-1.11.1.min.js' %}"></script>
-	<link href="{% static 'core/js/bootstrap.bundle.min.js' %}" rel="stylesheet" type="text/javascript">
+{% block sidebar  %}
+{% include 'core/partials/sidebar.html' %}
+{% endblock  %}
+{% block content %}
 
 
-</head>
-<body>
-	<header class="header clearfix">
-		<div>
-			<h1>STATISTICHE PARTITA</h1>
-	</div>
-	</header>
 	<form action="" method="POST"> {% csrf_token %}
 		<div class="form-row mt-3">
 			<div class="col-2 offset-4">
@@ -34,6 +21,11 @@
 		</div>
 
 	</form>
+<div class="row">
+	<div class="col-1 offset-4">
+		<a href="{%url 'core:stats' match.id %}" ><button type="button" class="btn btn-success btn">Riassunto Statistiche</button></a>
+	</div>
+</div>
 	<h2 class="mx-3">1° TEMPO</h2>
 		<form action="{% url 'core:update_match' match.pk %}" method="POST"> {% csrf_token %}
 			<div class="row">
@@ -443,14 +435,26 @@
 				</div>
 			</div>
 
-		<input type="submit" class="btn btn btn-warning mt-2" value="UPDATE STATS">
+		<input type="submit" class="btn btn btn-warning mt-2" value="Salva">
+		<button type="button" class="btn btn-info mt-2" id="browserPrint">Stampa</button>
 		</form>
 
-
-
 	<script type="text/javascript" src="{% static 'core/js/timer.js' %}"></script>
-	<script type="text/javascript" src="{% static 'core/js/cronos.js' %}"></script>
+	<script>
+		var generalcrono = document.querySelector('#crono1');
+		var events = document.querySelectorAll("input")
+		for (var newevent of events) {
+    		newevent.addEventListener("change", function(){
+        	console.log(generalcrono.value + " " + this.parentElement.parentElement.previousElementSibling.textContent + " " + this.name.slice(-1))
+    	    {% comment %} var crono=encodeURIComponent(generalcrono.value) {% endcomment %}
+			const url = "{% url 'core:new_event' match.pk %}" + "?crono=" + generalcrono.value + "&team=" +  this.name.slice(-1) + "&event=" + encodeURIComponent(this.parentElement.parentElement.previousElementSibling.textContent)
+        	fetch(url).then(response => response.json()).then(function(data) {
+            console.log(data.created)
+        		})
+    		})
+		}
+	</script>
+
+{%endblock%}
 
 
-</body>
-</html>
