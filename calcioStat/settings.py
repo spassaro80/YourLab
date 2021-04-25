@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (os.getenv('ENVIRONMENT') == "DEVELOPMENT")
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','YourLab.eu.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'YourLab.eu.pythonanywhere.com']
 
 
 # Application definition
@@ -126,8 +126,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# Redirect pages after login 
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# Redirect pages after login
 
 LOGIN_REDIRECT_URL='core:home'
 LOGOUT_REDIRECT_URL='core:home'
